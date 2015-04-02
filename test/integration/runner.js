@@ -10,7 +10,7 @@
 
 var util = require('util');
 var mocha = require('mocha');
-var log = new (require('captains-log'))();
+var log = require('debug-logger')('sails-sqlserver:runner');
 var TestRunner = require('waterline-adapter-tests');
 var Adapter = require('../../lib/adapter.js');
 
@@ -33,14 +33,14 @@ catch (e) {
 log.info('Testing `' + package.name + '`, a Sails/Waterline adapter.');
 log.info('Running `waterline-adapter-tests` against ' + interfaces.length + ' interfaces...');
 log.info('( ' + interfaces.join(', ') + ' )');
-console.log();
+log.debug();
 log('Latest draft of Waterline adapter interface spec:');
 log('http://links.sailsjs.org/docs/plugins/adapters/interfaces');
-console.log();
+log.debug();
 
 var mssql = require('mssql');
 
-console.log('Dropping any existing tables...');
+log.debug('Dropping any existing tables...');
 var connection = new mssql.Connection({
     user: process.env.MSSQL_USER,
     password: process.env.MSSQL_PASSWORD,
@@ -69,8 +69,8 @@ var connection = new mssql.Connection({
       'end'
     ].join(' '), function (err, results) {
       if (err) throw err;
-      console.log('Starting test runner...');
-      
+      log.debug('Starting test runner...');
+
       new TestRunner({
 
         mocha: {

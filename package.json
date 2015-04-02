@@ -39,7 +39,8 @@
     "lodash": "^3.2",
     "mssql": "^2.1",
     "underscore.string": "^3.0.0",
-    "waterline-cursor": "0.0.5"
+    "waterline-cursor": "0.0.5",
+    "debug-logger": "0.4.1"
   },
   "bundledDependencies": [
     "lodash",
